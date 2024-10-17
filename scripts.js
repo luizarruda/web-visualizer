@@ -1,34 +1,53 @@
-// Função para processar o upload do arquivo JSON
 document.getElementById('fileInput').addEventListener('change', handleFileSelect, false);
 
+// Função para processar o upload de arquivo ZIP
 function handleFileSelect(event) {
     const file = event.target.files[0];
-    if (file) {
+    if (file && file.name.endsWith('.zip')) {
         const reader = new FileReader();
         reader.onload = function(e) {
-            const jsonData = JSON.parse(e.target.result);
-            // Gerar a tabela de ranges com base no arquivo JSON
-            generateRangeChart(jsonData);
+            // Descompactar o arquivo ZIP usando JSZip
+            JSZip.loadAsync(e.target.result).then(function(zip) {
+                const decisionList = document.getElementById('decisionList');
+                decisionList.innerHTML = ''; // Limpar a lista de decisões
+
+                // Procurar arquivos JSON dentro do ZIP
+                zip.forEach(function (relativePath, zipEntry) {
+                    if (zipEntry.name.endsWith('.json')) {
+                        // Criar um item no menu para cada decisão
+                        const decisionItem = document.createElement('button');
+                        decisionItem.textContent = `Decisão ${zipEntry.name.replace('.json', '')}`;
+                        decisionItem.classList.add('decision-button');
+
+                        // Adicionar evento de clique para carregar a decisão
+                        decisionItem.addEventListener('click', function() {
+                            zipEntry.async("string").then(function(content) {
+                                const jsonData = JSON.parse(content);
+                                // Gerar a tabela de ranges com base no JSON
+                                generateRangeChart(jsonData);
+                            });
+                        });
+
+                        // Adicionar o item ao menu
+                        decisionList.appendChild(decisionItem);
+                    }
+                });
+            });
         };
-        reader.readAsText(file);
+        reader.readAsArrayBuffer(file);
+    } else {
+        alert('Please upload a ZIP file.');
     }
 }
 
 function generateRangeChart(data) {
-    const selectedTreeLevel = document.getElementById('treeLevel').value;
-    const selectedPosition = document.getElementById('position').value;
-
-    // Extrair os ranges do JSON com base no nível da gametree e posição
-    const ranges = extractRangesFromData(data, selectedTreeLevel, selectedPosition);
-
-    // Exibir a tabela de ranges
+    // Função que processa os dados JSON e gera a tabela de ranges
+    const ranges = extractRangesFromData(data);
     drawRangeChart(ranges);
 }
 
-function extractRangesFromData(data, treeLevel, position) {
-    // Esta função extrai os ranges do arquivo JSON com base na seleção do usuário
-    // Use o campo `data` para acessar o conteúdo JSON
-    // Para fins de exemplo, retornamos um objeto fictício
+function extractRangesFromData(data) {
+    // Aqui você pode adaptar o processamento do JSON conforme o formato dos arquivos
     const mockRanges = {
         "AA": "raise", "AKs": "raise", "AQs": "raise", "A5s": "raise",
         "KK": "raise", "KQs": "raise", "KJs": "raise",
@@ -36,7 +55,7 @@ function extractRangesFromData(data, treeLevel, position) {
         "TT": "raise", "99": "raise", "88": "raise",
         "76s": "fold", "65s": "raise", "54s": "fold"
     };
-    return mockRanges;
+    return mockRanges;  // Substitua pela lógica correta baseada no conteúdo do JSON
 }
 
 function drawRangeChart(ranges) {

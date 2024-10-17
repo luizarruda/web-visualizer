@@ -9,8 +9,8 @@
 <body>
     <h1>Poker Range Visualizer</h1>
     
-    <!-- Upload de arquivo JSON -->
-    <input type="file" id="fileInput" accept=".json">
+    <!-- Upload de arquivo ZIP -->
+    <input type="file" id="fileInput" accept=".zip">
     
     <div class="container">
         <!-- Área para visualização da tabela de ranges -->
@@ -35,10 +35,17 @@
                 <option value="SB">SB</option>
                 <option value="BB">BB</option>
             </select>
+
+            <!-- Lista de decisões -->
+            <div id="decisionList">
+                <!-- Decisões serão carregadas aqui dinamicamente -->
+            </div>
         </div>
     </div>
 
-    <!-- Inclusão do arquivo de JavaScript -->
+    <!-- JSZip para descompactar o arquivo -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+    <!-- Script JavaScript -->
     <script src="scripts.js"></script>
 </body>
 </html>
