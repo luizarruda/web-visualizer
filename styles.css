@@ -3,13 +3,14 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f4f4f9;
+    background-color: #1e1e1e; /* Tom mais escuro */
+    color: #ffffff; /* Texto branco para melhor contraste */
     margin: 0;
     padding: 20px;
 }
 
 h1 {
-    color: #333;
+    color: #ffffff; /* Título em branco */
 }
 
 .container {
@@ -20,7 +21,7 @@ h1 {
 
 .menu {
     width: 20%;
-    background-color: #fff;
+    background-color: #333333; /* Menu com fundo escuro */
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -28,6 +29,7 @@ h1 {
 
 .chart {
     width: 75%;
+    background-color: #1e1e1e; /* Fundo escuro para a tabela */
 }
 
 select, input {
@@ -36,11 +38,13 @@ select, input {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+    background-color: #2e2e2e; /* Fundo escuro para os inputs */
+    color: #ffffff; /* Texto branco */
 }
 
 label {
     font-weight: bold;
+    color: #ffffff; /* Texto branco */
 }
 
 .decision-button {
@@ -49,7 +53,7 @@ label {
     padding: 10px;
     margin-bottom: 5px;
     background-color: #007bff;
-    color: #fff;
+    color: #ffffff; /* Texto branco */
     border: none;
     cursor: pointer;
     border-radius: 4px;
