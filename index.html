@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poker Range Visualizer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Poker Range Visualizer</h1>
+    
+    <!-- Upload de arquivo JSON -->
+    <input type="file" id="fileInput" accept=".json">
+    
+    <div class="container">
+        <!-- Área para visualização da tabela de ranges -->
+        <div id="rangeChart" class="chart"></div>
+        
+        <!-- Menu lateral -->
+        <div class="menu">
+            <h3>Select Game Options</h3>
+            
+            <!-- Seletor de nível da gametree -->
+            <label for="treeLevel">Gamestage:</label>
+            <select id="treeLevel">
+                <option value="RFI">RFI</option>
+                <option value="vsRFI">vs RFI</option>
+                <option value="vs3bet">vs 3bet</option>
+            </select>
+
+            <!-- Seletor de posição do jogador -->
+            <label for="position">Position:</label>
+            <select id="position">
+                <option value="BTN">BTN</option>
+                <option value="SB">SB</option>
+                <option value="BB">BB</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Inclusão do arquivo de JavaScript -->
+    <script src="scripts.js"></script>
+</body>
+</html>
