@@ -96,4 +96,16 @@ function drawRangeChart(ranges) {
 
             if (ranges[hand] > 0) {
                 cell.textContent = `${ranges[hand]}%`;
-                cell.style.backgroundColor = `rgba(255
+                cell.style.backgroundColor = `rgba(255, 165, 0, ${ranges[hand] / 100})`;
+            } else {
+                cell.textContent = `0%`;
+                cell.style.backgroundColor = 'lightgray';
+            }
+
+            row.appendChild(cell);
+        });
+        table.appendChild(row);
+    });
+
+    chartContainer.appendChild(table);
+}
